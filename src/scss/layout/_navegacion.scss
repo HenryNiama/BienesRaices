@@ -12,11 +12,15 @@
 
 .navegacion{
 
-    display: none;
+    visibility: hidden; //Se usa esta propiedad en lugar de display: none; ya que con visbility si se puede animar.
+    opacity: 0;
+    transition: visibility .3s ease-in-out, opacity 0.5s linear; //Se agrega la animacion a la propiedad visibility
 
     @include tablet{
         display: flex;
         align-items: center;
+        opacity: 1;
+        visibility: visible;
     }
 
     a{
@@ -52,5 +56,6 @@
 
 
 .mostrar{
-    display: block;
+    visibility: visible;
+    opacity: 1;
 }
