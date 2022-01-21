@@ -1,4 +1,11 @@
 <?php 
+
+    //Base de datos
+    require '../../includes/config/database.php';
+    $db = conectarBD();
+    //var_dump($db); nomas para verificar la conexion como sale y es.
+    
+
     require '../../includes/funciones.php';
 
     incluirTemplate('header');
