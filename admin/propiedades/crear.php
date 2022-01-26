@@ -24,9 +24,6 @@
     //Ejecutar el codigo despues de que el usuario envia el formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-
-        exit;
         // echo "<pre>";
         // var_dump($_POST);
         // echo "</pre>";
@@ -40,6 +37,8 @@
         $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedor']);
         $creado = date('Y/m/d');
         
+        //Asignar files hacia una variable
+        $imagen = $_FILES['imagen'];
 
         if (!$titulo) {//Si no hay titulo, es decir, esta vacio.
             $errores[] = "Debes anadir un titulo.";
@@ -68,6 +67,17 @@
         if (!$vendedorId) {//Si no hay titulo, es decir, esta vacio.
             $errores[] = "Elige un vendedor.";
         }
+
+        if (!$imagen['name'] || $imagen['error']) {
+            $errores[] = 'La Imagen es Obligatoria';
+        }
+
+            //Validar por tamano (100 kb maximo)
+            $medida = 1000 * 100;
+
+            if($imagen['size'] > $medida){
+                $errores[] = 'La Imagen es muy pesada';
+            }
 
         // echo "<pre>";
         // var_dump($errores);
@@ -112,7 +122,7 @@
                 </div>
             <?php endforeach; ?>    
    
-        <form action="/admin/propiedades/crear.php" class="formulario" method="POST">
+        <form action="/admin/propiedades/crear.php" class="formulario" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <legend>Información General</legend>
 
