@@ -5,6 +5,10 @@
     $db = conectarBD();
     //var_dump($db); nomas para verificar la conexion como sale y es.
     
+    //Consultar para obtener los vendedores
+    $consulta = "SELECT * FROM vendedores";
+    $resultado = mysqli_query($db, $consulta);
+
 
     //Arreglo con mensajes de errores
     $errores = [];
@@ -16,7 +20,6 @@
     $wc = '';
     $estacionamiento = '';
     $vendedorId = '';
-
 
     //Ejecutar el codigo despues de que el usuario envia el formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,7 +34,9 @@
         $wc = $_POST['wc'];
         $estacionamiento = $_POST['estacionamiento'];
         $vendedorId = $_POST['vendedor'];
+        $creado = date('Y/m/d');
         
+
         if (!$titulo) {//Si no hay titulo, es decir, esta vacio.
             $errores[] = "Debes anadir un titulo.";
         }
@@ -67,8 +72,8 @@
         //Revisar que el array de errores esté vacío
         if (empty($errores)) {
             //Insertar en la Base de Datos
-            $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, 
-            vendedorId) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', 
+            $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, 
+            vendedorId) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', 
             '$vendedorId')";
 
 
@@ -76,7 +81,10 @@
             $resultado = mysqli_query($db, $query);
 
             if($resultado){
-                echo "Insertado Correctamente";
+                //echo "Insertado Correctamente";
+
+                //Redireccionar al usuario
+                header("Location: /admin");
             }
         }
 
@@ -136,10 +144,12 @@
                 <legend>Vendedor</legend>
 
                 <select name="vendedor" id="vendedor">
-                    <optgroup label="--Seleccione Vendedor--">
-                        <option value="1">Juan</option>
-                        <option value="2">Karen</option>
-                    </optgroup>
+                        <option value="">--Seleccione--</option>
+                    <?php while($vendedor = mysqli_fetch_assoc($resultado)): ?>
+                        <option <?php echo $vendedorId === $vendedor['id'] ? 'selected' : '';?> value="<?php echo $vendedor['id']; ?>">
+                             <?php echo $vendedor['nombre'] . " " . $vendedor['apellido'];?>
+                        </option>
+                    <?php endwhile; ?>
                 </select>
             </fieldset>
 
