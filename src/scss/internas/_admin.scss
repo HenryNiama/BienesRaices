@@ -9,4 +9,8 @@
     &.error{//pongo el & xq estan en el mismo nivel del div.
         background-color: $rojo;
     }
+
+    &.exito{
+        background-color: $verde;
+    }
 }
