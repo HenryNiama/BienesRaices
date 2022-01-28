@@ -1,6 +1,6 @@
 <?php 
 
-//Validar la URL por ID valido.
+    //Validar la URL por ID valido.
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -14,6 +14,14 @@
     $db = conectarBD();
     //var_dump($db); nomas para verificar la conexion como sale y es.
     
+
+    //Obtener los datos de la propiedad
+    $consulta = "SELECT * FROM propiedades WHERE id = ${id}";
+    $resultado = mysqli_query($db, $consulta);
+    $propiedad = mysqli_fetch_assoc($resultado);
+
+
+
     //Consultar para obtener los vendedores
     $consulta = "SELECT * FROM vendedores";
     $resultado = mysqli_query($db, $consulta);
@@ -22,13 +30,14 @@
     //Arreglo con mensajes de errores
     $errores = [];
 
-    $titulo = '';
-    $precio = '';
-    $descripcion = '';
-    $habitaciones = '';
-    $wc = '';
-    $estacionamiento = '';
-    $vendedorId = '';
+    $titulo = $propiedad['titulo'];
+    $precio = $propiedad['precio'];
+    $descripcion = $propiedad['descripcion'];
+    $habitaciones = $propiedad['habitaciones'];
+    $wc = $propiedad['wc'];
+    $estacionamiento = $propiedad['estacionamiento'];
+    $vendedorId = $propiedad['vendedorId'];
+    $imagenPropiedad = $propiedad['imagen'];
 
     //Ejecutar el codigo despues de que el usuario envia el formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -160,6 +169,8 @@
 
                 <label for="imagen">Imágen</label>
                 <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
+
+                <img src="/imagenes/<?php echo $imagenPropiedad; ?>" class="imagen-small" alt="">
 
                 <label for="descripcion">Descripción</label>
                 <textarea name="descripcion" id="descripcion" name="descripcion" cols="30" rows="10">
