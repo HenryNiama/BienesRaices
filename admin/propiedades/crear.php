@@ -103,7 +103,7 @@
             $nombreImagen = md5(uniqid(rand(), true));
 
             //Subir la imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . "/". $nombreImagen . ".jpg");
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . "/". $nombreImagen."jpg");
             
 
             //Insertar en la Base de Datos
