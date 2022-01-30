@@ -1,5 +1,17 @@
 <?php
 
+    session_start();
+
+        // echo "<pre>";
+        //     var_dump($_SESSION);
+        // echo "</pre>";
+
+    $auth = $_SESSION['login'];
+
+    if (!$auth) {//Si no esta autenticado   
+        header('Location: /');//Se va a la pagina de inicio
+    }
+
     //1) Importar la conexion
 
     //Base de datos
