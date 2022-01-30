@@ -31,7 +31,7 @@
 
         //Si no hay errores, todo esta bien:
         if (empty($errores)) {
-            
+
             //Revisar si el usuario existe
             $query = "SELECT * from usuarios WHERE email = '${email}';";
 
@@ -41,6 +41,19 @@
 
             if ($resultado->num_rows) {//En caso de que haya resultados:, num_rows diferente de 0
                 //Revisar si el password es correcto:
+                //recuperamos la fila del query realizado>
+                $usuario = mysqli_fetch_assoc($resultado);
+                    //var_dump($usuario);
+                
+                //Verificar si el password es correcto o no
+                $auth = password_verify($password, $usuario['password']);//retorna TRUE or FALSE
+                    //var_dump($auth);
+
+                if ($auth) {
+                    //El usuario esta autenticado
+                }else{
+                    $errores[] = 'El password es incorrecto';
+                }
 
             }else{
                 $errores[] = "El usuario no existe.";
