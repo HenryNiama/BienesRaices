@@ -28,8 +28,23 @@
         //  var_dump($errores);
         // echo "</pre>";
     
+
+        //Si no hay errores, todo esta bien:
         if (empty($errores)) {
             
+            //Revisar si el usuario existe
+            $query = "SELECT * from usuarios WHERE email = '${email}';";
+
+            $resultado = mysqli_query($db, $query);
+            
+                //var_dump($resultado);
+
+            if ($resultado->num_rows) {//En caso de que haya resultados:, num_rows diferente de 0
+                //Revisar si el password es correcto:
+
+            }else{
+                $errores[] = "El usuario no existe.";
+            }
         }
     }
 
