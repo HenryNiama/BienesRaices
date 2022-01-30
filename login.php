@@ -61,6 +61,7 @@
                     //     var_dump($_SESSION);
                     // echo "</pre>";
 
+                    header('Location: /admin');
 
                 }else{
                     $errores[] = 'El password es incorrecto';

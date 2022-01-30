@@ -1,3 +1,20 @@
+<?php
+
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    
+    // echo "<pre>";
+    //     var_dump($_SESSION);
+    // echo "</pre>";
+
+    //Si esta autenticado:
+    $auth = $_SESSION['login'] ?? false; //da un true o false
+        // var_dump($auth);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +44,9 @@
                         <a href="anuncios.php">Anuncios</a>
                         <a href="blog.php">Blog</a>
                         <a href="contacto.php">Contacto</a>
+                        <?php if($auth): ?>
+                            <a href="cerrar-sesion.php">Sign Out</a>
+                        <?php endif; ?>
                     </nav>
                 </div>
             </div><!--Barra-->
