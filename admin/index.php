@@ -1,12 +1,8 @@
 <?php
 
-    session_start();
-
-        // echo "<pre>";
-        //     var_dump($_SESSION);
-        // echo "</pre>";
-
-    $auth = $_SESSION['login'];
+require '../includes/funciones.php';
+    
+    $auth = estaAutenticado();
 
     if (!$auth) {//Si no esta autenticado   
         header('Location: /');//Se va a la pagina de inicio
@@ -63,8 +59,6 @@
     
 
     //Incluye un template
-    require '../includes/funciones.php';
-
     incluirTemplate('header');
 ?>
 

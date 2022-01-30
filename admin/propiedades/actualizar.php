@@ -1,5 +1,15 @@
 <?php 
 
+require '../../includes/funciones.php';
+    
+    $auth = estaAutenticado();
+
+    if (!$auth) {//Si no esta autenticado   
+        header('Location: /');//Se va a la pagina de inicio
+    }
+
+
+
     //Validar la URL por ID valido.
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -149,7 +159,6 @@
 
     }
 
-    require '../../includes/funciones.php';
 
     incluirTemplate('header');
 ?>
