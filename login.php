@@ -1,6 +1,6 @@
 <?php 
 
-    require 'includes/config/database.php';
+require 'includes/app.php';
 
     $db = conectarBD();
 
@@ -79,8 +79,6 @@
 
 
     //Incluye el header
-    require 'includes/funciones.php';
-
     incluirTemplate('header');
 ?>
 

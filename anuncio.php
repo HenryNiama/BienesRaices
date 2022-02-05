@@ -7,9 +7,9 @@
         header('Location: /');//Se va la pagina principal, al index.
     }
 
-        //Importar la conexion
-        require 'includes/config/database.php';
+    require 'includes/app.php';
 
+        //Importar la conexion
         $db = conectarBD();
     
         //Consultar
@@ -26,7 +26,6 @@
         $propiedad = mysqli_fetch_assoc($resultado);
 
 
-    require 'includes/funciones.php';
 
     incluirTemplate('header');
 ?>
