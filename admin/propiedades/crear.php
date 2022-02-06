@@ -1,16 +1,16 @@
 <?php 
 
-    require '../../includes/funciones.php';
+    require '../../includes/app.php';
         
-    $auth = estaAutenticado();
+    use App\Propiedad;
 
-    if (!$auth) {//Si no esta autenticado   
-        header('Location: /');//Se va a la pagina de inicio
-    }
+
+    estaAutenticado();
+
+
 
 
     //Base de datos
-    require '../../includes/config/database.php';
     $db = conectarBD();
     //var_dump($db); nomas para verificar la conexion como sale y es.
     
