@@ -8,8 +8,6 @@
     estaAutenticado();
 
 
-
-
     //Base de datos
     $db = conectarBD();
     //var_dump($db); nomas para verificar la conexion como sale y es.
@@ -120,12 +118,6 @@
             //Subir la imagen
             move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . "/". $nombreImagen);
             
-
-            //Insertar en la Base de Datos
-            $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, 
-            vendedorId) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', 
-            '$vendedorId')";
-
 
             // echo $query;
             $resultado = mysqli_query($db, $query);
