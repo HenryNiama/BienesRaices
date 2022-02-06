@@ -18,7 +18,9 @@
 
 
     //Arreglo con mensajes de errores
-    $errores = [];
+    $errores = Propiedad::getErrores();
+    // debugear($errores);
+
 
     $titulo = '';
     $precio = '';
@@ -33,75 +35,24 @@
 
         $propiedad = new Propiedad($_POST);
 
+        $errores = $propiedad->validar();
+
         //debugear($propiedad);
-        $propiedad->guardar();
-
-
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
-
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "</pre>";
-
-        $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
-        $precio = mysqli_real_escape_string( $db, $_POST['precio']);
-        $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion']);
-        $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones']);
-        $wc = mysqli_real_escape_string( $db, $_POST['wc']);
-        $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
-        $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedorId']);
-        $creado = date('Y/m/d');
         
-        //Asignar files hacia una variable
-        $imagen = $_FILES['imagen'];
-
-        if (!$titulo) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "Debes anadir un titulo.";
-        }
-
-        if (!$precio) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El precio es obligatorio.";
-        }
-
-        if (strlen($descripcion) < 50) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "La descripcion es obligatoria y debe tener al menos 50 caracteres.";
-        }
-
-        if (!$habitaciones) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El numero de habitaciones es obligatorio.";
-        }
-
-        if (!$wc) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El Número de baños es obligatorio.";
-        }
-
-        if (!$estacionamiento) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El Número de lugares de estacionamiento es obligatorio.";
-        }
-
-        if (!$vendedorId) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "Elige un vendedor.";
-        }
-
-        if (!$imagen['name'] || $imagen['error']) {
-            $errores[] = 'La Imagen es Obligatoria';
-        }
-
-            //Validar por tamano (1 mb maximo)
-            $medida = 1000 * 1000;
-
-            if($imagen['size'] > $medida){
-                $errores[] = 'La Imagen es muy pesada';
-            }
-
-        // echo "<pre>";
-        // var_dump($errores);
-        // echo "</pre>";
-    
         //Revisar que el array de errores esté vacío
         if (empty($errores)) {
+
+            $propiedad->guardar();
+
+            //Asignar files hacia una variable
+            $imagen = $_FILES['imagen'];
+
+            
+            // echo "<pre>";
+            // var_dump($errores);
+            // echo "</pre>";
+    
+
 
             /*SUBIDA DE ARCHIVOS */
             

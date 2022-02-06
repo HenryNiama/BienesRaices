@@ -8,6 +8,8 @@ class Propiedad{
     protected static $db;
     protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
 
+    //Errores
+    protected static $errores = [];
 
     public $id;
     public $titulo;
@@ -63,7 +65,7 @@ class Propiedad{
 
         //Como ya esta instanciada y conectada nuestra base de datos con el metodo estatico y $db, entonces:
         $resultado = self::$db->query($query);
-        debugear($resultado);
+        // debugear($resultado);
     }
 
     //Este metodo se encarga de iterar $columnasDB[], identifica y une los atributos de la BD
@@ -98,6 +100,57 @@ class Propiedad{
         return $sanitizado;
     }
 
+
+
+    //Validacion
+    public static function getErrores(){
+        return self::$errores;
+    }
+
+
+    public function validar()
+    {
+        if (!$this->titulo) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "Debes anadir un titulo.";
+        }
+
+        if (!$this->precio) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El precio es obligatorio.";
+        }
+
+        if (strlen(!$this->descripcion) < 50) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "La descripcion es obligatoria y debe tener al menos 50 caracteres.";
+        }
+
+        if (!$this->habitaciones) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El numero de habitaciones es obligatorio.";
+        }
+
+        if (!$this->wc) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El Número de baños es obligatorio.";
+        }
+
+        if (!$this->estacionamiento) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El Número de lugares de estacionamiento es obligatorio.";
+        }
+
+        if (!$this->vendedorId) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "Elige un vendedor.";
+        }
+
+        // if (!$this->imagen['name'] || !$this->imagen['error']) {
+        //     $errores[] = 'La Imagen es Obligatoria';
+        // }
+
+        //     //Validar por tamano (1 mb maximo)
+        //     $medida = 1000 * 1000;
+
+        //     if(!$this->imagen['size'] > $medida){
+        //         $errores[] = 'La Imagen es muy pesada';
+        //     }
+
+        return self::$errores;
+    }
 
 }
 
