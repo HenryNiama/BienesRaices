@@ -39,7 +39,6 @@ class Propiedad{
         $this->estacionamiento = $args['estacionamiento'] ?? '';
         $this->creado = date('Y/m/d');
         $this->vendedorId = $args['vendedorId'] ?? '';
-
     }
 
     public function guardar()
@@ -49,15 +48,21 @@ class Propiedad{
         $atributos = $this->sanitizarAtributos();
         // debugear($atributos);
 
-        //Insertar en la Base de Datos
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId)
-                  VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', 
-                '$this->vendedorId')";
-        
-        //debugear($query);
-        //Como ya esta instanciada y conectada nuestra base de datos con el metodo estiativo y $db, entonces:
-        $resultado = self::$db->query($query);
+        // $string = implode(", ", array_keys($atributos));
+        // debugear($string);
+        // debugear(array_keys($atributos));
 
+        //Insertar en la Base de Datos
+        $query = "INSERT INTO propiedades ( " ;
+        $query .= implode(", ", array_keys($atributos));
+        $query .=" ) VALUES (' ";
+        $query .= implode("', '", array_values($atributos));
+        $query .= " ')";
+        // debugear($query);
+
+
+        //Como ya esta instanciada y conectada nuestra base de datos con el metodo estatico y $db, entonces:
+        $resultado = self::$db->query($query);
         debugear($resultado);
     }
 
