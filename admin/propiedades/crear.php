@@ -4,6 +4,7 @@
         
     use App\Propiedad;
 
+    use Intervention\Image\ImageManagerStatic as Image;
 
     estaAutenticado();
 
@@ -11,6 +12,7 @@
     //Base de datos
     $db = conectarBD();
     //var_dump($db); nomas para verificar la conexion como sale y es.
+    
     
     //Consultar para obtener los vendedores
     $consulta = "SELECT * FROM vendedores";
@@ -33,56 +35,52 @@
     //Ejecutar el codigo despues de que el usuario envia el formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        //Crea una nueva instancia
         $propiedad = new Propiedad($_POST);
 
-        $errores = $propiedad->validar();
-
-        //debugear($propiedad);
-        
-        //Revisar que el array de errores esté vacío
-        if (empty($errores)) {
-
-            $propiedad->guardar();
-
-            //Asignar files hacia una variable
-            $imagen = $_FILES['imagen'];
-
+        /*SUBIDA DE ARCHIVOS */
             
-            // echo "<pre>";
-            // var_dump($errores);
-            // echo "</pre>";
-    
-
-
-            /*SUBIDA DE ARCHIVOS */
-            
-            //Crear carpeta
-            $carpetaImagenes = '../../imagenes';
-
-            if (!is_dir($carpetaImagenes)) {
-                mkdir($carpetaImagenes);
-            }
             
             //Generar un nombre unico
             $nombreImagen = md5(uniqid(rand(), true)).(".jpg");
 
-            //Subir la imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . "/". $nombreImagen);
+            //Setear la imagen
+            if ($_FILES['imagen']['tmp_name']) {//Si existe la imagen, entonces lo seteamos
+
+                //Realiza un resize a la imagen con Intervention
+                $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800,600);//Este es el archivo/imagen
+
+                //Guardamos el nombre de la imagen en nuestra base de datos, no el archivo
+                $propiedad->setImagen($nombreImagen); 
+            }
+
+
+        //Validar
+        $errores = $propiedad->validar();
+
+
+        if (empty($errores)) {
             
+            //Crear la carpeta para subir imagenes
+            if (!is_dir(CARPETA_IMAGENES)) {
+                mkdir(CARPETA_IMAGENES);
+            }
 
-            // echo $query;
-            $resultado = mysqli_query($db, $query);
+            //Ahora, guardamos la imagen en el servidor
+            $image->save(CARPETA_IMAGENES . $nombreImagen);//Este metodo es de la libreria de Intervention Image
 
+            //Guarda en la base de datos
+            $resultado = $propiedad->guardar();
+
+            //Mensaje de exito:
             if($resultado){
-                //echo "Insertado Correctamente";
-
                 //Redireccionar al usuario
                 header("Location: /admin?resultado=1");
             }
         }
 
-
     }
+
 
     incluirTemplate('header');
 ?>

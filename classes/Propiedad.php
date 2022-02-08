@@ -34,7 +34,7 @@ class Propiedad{
         $this->id = $args['id'] ?? '';
         $this->titulo = $args['titulo'] ?? '';
         $this->precio = $args['precio'] ?? '';
-        $this->imagen = $args['imagen'] ?? 'imagen.jpg';
+        $this->imagen = $args['imagen'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
         $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['wc'] ?? '';
@@ -65,7 +65,8 @@ class Propiedad{
 
         //Como ya esta instanciada y conectada nuestra base de datos con el metodo estatico y $db, entonces:
         $resultado = self::$db->query($query);
-        // debugear($resultado);
+        
+        return $resultado;
     }
 
     //Este metodo se encarga de iterar $columnasDB[], identifica y une los atributos de la BD
@@ -101,7 +102,6 @@ class Propiedad{
     }
 
 
-
     //Validacion
     public static function getErrores(){
         return self::$errores;
@@ -118,7 +118,7 @@ class Propiedad{
             self::$errores[] = "El precio es obligatorio.";
         }
 
-        if (strlen(!$this->descripcion) < 50) {//Si no hay titulo, es decir, esta vacio.
+        if (strlen($this->descripcion) < 50 || !$this->descripcion) {//Si no hay titulo, es decir, esta vacio.
             self::$errores[] = "La descripcion es obligatoria y debe tener al menos 50 caracteres.";
         }
 
@@ -138,18 +138,22 @@ class Propiedad{
             self::$errores[] = "Elige un vendedor.";
         }
 
-        // if (!$this->imagen['name'] || !$this->imagen['error']) {
-        //     $errores[] = 'La Imagen es Obligatoria';
-        // }
+        if (!$this->imagen) {
+            self::$errores[] = 'La Imagen es Obligatoria';
+        }
 
-        //     //Validar por tamano (1 mb maximo)
-        //     $medida = 1000 * 1000;
-
-        //     if(!$this->imagen['size'] > $medida){
-        //         $errores[] = 'La Imagen es muy pesada';
-        //     }
 
         return self::$errores;
+    }
+
+
+    //Subida de archivos
+    public function setImagen($imagen)
+    {
+        //Asignar al atributo de imagen el nombre de la imagen
+        if ($imagen) {
+            $this->imagen = $imagen;
+        }
     }
 
 }
