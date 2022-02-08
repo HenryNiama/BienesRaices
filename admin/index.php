@@ -1,12 +1,15 @@
 <?php
 
-require '../includes/funciones.php';
+require '../includes/app.php';
     
-    $auth = estaAutenticado();
+    estaAutenticado();
 
-    if (!$auth) {//Si no esta autenticado   
-        header('Location: /');//Se va a la pagina de inicio
-    }
+    use App\Propiedad;
+
+
+    //Implementar un método para obtener todas las propiedades
+    $propiedades = Propiedad::all();
+    //debugear($propiedades);
 
     //1) Importar la conexion
 
