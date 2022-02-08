@@ -30,3 +30,10 @@ function debugear($variable)
     echo "</pre>";
     exit;
 }
+
+//Escapar / Sanitizar el HTMl
+function s($html) : string
+{
+    $s = htmlspecialchars($html);
+    return $s;    
+}
