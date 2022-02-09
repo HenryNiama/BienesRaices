@@ -215,6 +215,15 @@ class Propiedad{
 
     }
 
+    //Sincroniza el objeto en memoria con los cambios realizados por el usuario.
+    public function sincronizar($args = []){//Recibe un array, como default, un arreglo vacio
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
 }
 
 ?>

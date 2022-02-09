@@ -29,7 +29,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //Crea una nueva instancia
-        $propiedad = new Propiedad($_POST);
+        $propiedad = new Propiedad($_POST['propiedad']);
 
         /*SUBIDA DE ARCHIVOS */
             
@@ -38,10 +38,10 @@
             $nombreImagen = md5(uniqid(rand(), true)).(".jpg");
 
             //Setear la imagen
-            if ($_FILES['imagen']['tmp_name']) {//Si existe la imagen, entonces lo seteamos
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {//Si existe la imagen, entonces lo seteamos
 
                 //Realiza un resize a la imagen con Intervention
-                $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800,600);//Este es el archivo/imagen
+                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);//Este es el archivo/imagen
 
                 //Guardamos el nombre de la imagen en nuestra base de datos, no el archivo
                 $propiedad->setImagen($nombreImagen); 

@@ -32,19 +32,15 @@ require '../../includes/app.php';
     //Ejecutar el codigo despues de que el usuario envia el formulario
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
+        // debugear($_POST);
 
-        $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
-        $precio = mysqli_real_escape_string( $db, $_POST['precio']);
-        $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion']);
-        $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones']);
-        $wc = mysqli_real_escape_string( $db, $_POST['wc']);
-        $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
-        $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedor']);
-        $creado = date('Y/m/d');
-        
+        //Asignar los atributos
+        $args = $_POST['propiedad'];
+
+
+        $propiedad->sincronizar($args);
+        debugear($propiedad);
+
         //Asignar files hacia una variable
         $imagen = $_FILES['imagen'];
 
