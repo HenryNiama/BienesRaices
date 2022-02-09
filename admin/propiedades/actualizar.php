@@ -26,7 +26,7 @@ require '../../includes/app.php';
 
 
     //Arreglo con mensajes de errores
-    $errores = [];
+    $errores = Propiedad::getErrores();
 
 
     //Ejecutar el codigo despues de que el usuario envia el formulario
@@ -37,52 +37,11 @@ require '../../includes/app.php';
         //Asignar los atributos
         $args = $_POST['propiedad'];
 
-
         $propiedad->sincronizar($args);
-        debugear($propiedad);
+        //debugear($propiedad);
 
-        //Asignar files hacia una variable
-        $imagen = $_FILES['imagen'];
-
-        if (!$titulo) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "Debes anadir un titulo.";
-        }
-
-        if (!$precio) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El precio es obligatorio.";
-        }
-
-        if (strlen($descripcion) < 50) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "La descripcion es obligatoria y debe tener al menos 50 caracteres.";
-        }
-
-        if (!$habitaciones) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El numero de habitaciones es obligatorio.";
-        }
-
-        if (!$wc) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El Número de baños es obligatorio.";
-        }
-
-        if (!$estacionamiento) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "El Número de lugares de estacionamiento es obligatorio.";
-        }
-
-        if (!$vendedorId) {//Si no hay titulo, es decir, esta vacio.
-            $errores[] = "Elige un vendedor.";
-        }
-
-            //Validar por tamano (1 mb maximo)
-            $medida = 1000 * 1000;
-
-            if($imagen['size'] > $medida){
-                $errores[] = 'La Imagen es muy pesada';
-            }
-
-        // echo "<pre>";
-        // var_dump($errores);
-        // echo "</pre>";
-    
+        $errores = $propiedad->validar();
+        
         //Revisar que el array de errores esté vacío
         if (empty($errores)) {
 
