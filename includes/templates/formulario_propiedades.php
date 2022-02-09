@@ -7,8 +7,12 @@
                 <label for="precio">Precio</label>
                 <input type="number" id="precio" name="precio" placeholder="Precio de la Propiedad" value="<?php echo s($propiedad->precio); ?>"> 
 
-                <label for="imagen">Imágen</label>
+                <label for="imagen">Imágen: </label>
                 <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
+
+                <?php if($propiedad->imagen) {?>
+                    <img src="/imagenes/<?php echo $propiedad->imagen ?>" class="imagen-small" alt="" srcset="">
+                <?php }?>
 
                 <label for="descripcion">Descripción</label>
                 <textarea name="descripcion" id="descripcion" name="descripcion" cols="30" rows="10">
