@@ -1,6 +1,7 @@
 <?php
 
 use App\Propiedad;
+use Intervention\Image\ImageManagerStatic as Image;
 
 require '../../includes/app.php';
     
@@ -40,39 +41,31 @@ require '../../includes/app.php';
         $propiedad->sincronizar($args);
         //debugear($propiedad);
 
+        //Validacion
         $errores = $propiedad->validar();
         
+        //Subida de Archivos
+
+            //Generar un nombre unico
+            $nombreImagen = md5(uniqid(rand(), true)).(".jpg");
+
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {//Si existe la imagen, entonces lo seteamos
+
+                //Realiza un resize a la imagen con Intervention
+                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);//Este es el archivo/imagen
+
+                //Guardamos el nombre de la imagen en nuestra base de datos, no el archivo
+                $propiedad->setImagen($nombreImagen); 
+            }
+
+
+
+
         //Revisar que el array de errores esté vacío
         if (empty($errores)) {
 
-            //Crear carpeta
-            $carpetaImagenes = '../../imagenes';
 
-            if (!is_dir($carpetaImagenes)) {
-                mkdir($carpetaImagenes);
-            }
-
-            $nombreImagen = '';
-
-            /*SUBIDA DE ARCHIVOS */
-
-            if ($imagen['name']) {
-                //echo "Si hay una nueva imagen";
-
-                //Eliminar la imagen previa, usamos unlink()
-                unlink($carpetaImagenes ."/". $propiedad['imagen']);
-
-                //Generar un nombre unico
-                $nombreImagen = md5(uniqid(rand(), true)).".jpg";
-
-                //Subir la imagen
-                move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . "/". $nombreImagen);
-
-            }else{//En caso de que no actualizemos la imagen
-                $nombreImagen = $propiedad['imagen'];
-            }
-            
-
+            exit;
 
             //Insertar en la Base de Datos
             $query = "UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', imagen = '${nombreImagen}', 

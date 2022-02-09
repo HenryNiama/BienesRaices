@@ -150,11 +150,21 @@ class Propiedad{
     //Subida de archivos
     public function setImagen($imagen)
     {
+        //Elimina la imagen previa
+        if ($this->id) {
+            //comprobar si existe el archivo(imagen)
+            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+
+            if ($existeArchivo) unlink(CARPETA_IMAGENES . $this->imagen);                     
+        }
+
         //Asignar al atributo de imagen el nombre de la imagen
         if ($imagen) {
             $this->imagen = $imagen;
         }
     }
+
+
 
     public static function all()
     {
