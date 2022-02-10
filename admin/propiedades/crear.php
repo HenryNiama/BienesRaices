@@ -35,7 +35,7 @@
             
             
             //Generar un nombre unico
-            $nombreImagen = md5(uniqid(rand(), true)).(".jpg");
+            $nombreImagen = md5(uniqid(rand(), true)). ".jpg";
 
             //Setear la imagen
             if ($_FILES['propiedad']['tmp_name']['imagen']) {//Si existe la imagen, entonces lo seteamos
@@ -63,7 +63,7 @@
             $image->save(CARPETA_IMAGENES . $nombreImagen);//Este metodo es de la libreria de Intervention Image
 
             //Guarda en la base de datos
-            $resultado = $propiedad->guardar();
+            $resultado = $propiedad->crear();
 
             //Mensaje de exito:
             if($resultado){

@@ -46,42 +46,25 @@ require '../../includes/app.php';
         
         //Subida de Archivos
 
-            //Generar un nombre unico
-            $nombreImagen = md5(uniqid(rand(), true)).(".jpg");
+        //Generar un nombre unico
+        $nombreImagen = md5(uniqid(rand(), true)). ".jpg";
 
-            if ($_FILES['propiedad']['tmp_name']['imagen']) {//Si existe la imagen, entonces lo seteamos
+        if ($_FILES['propiedad']['tmp_name']['imagen']) {//Si existe la imagen, entonces lo seteamos
 
-                //Realiza un resize a la imagen con Intervention
-                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);//Este es el archivo/imagen
+            //Realiza un resize a la imagen con Intervention
+            $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);//Este es el archivo/imagen
 
-                //Guardamos el nombre de la imagen en nuestra base de datos, no el archivo
-                $propiedad->setImagen($nombreImagen); 
-            }
-
-
-
+            //Guardamos el nombre de la imagen en nuestra base de datos, no el archivo
+            $propiedad->setImagen($nombreImagen); 
+        }
 
         //Revisar que el array de errores esté vacío
         if (empty($errores)) {
 
+            $image->save(CARPETA_IMAGENES . $nombreImagen);
 
-            exit;
+            $propiedad->guardar();
 
-            //Insertar en la Base de Datos
-            $query = "UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', imagen = '${nombreImagen}', 
-            descripcion = '${descripcion}', habitaciones = ${habitaciones}, wc = ${wc}, 
-            estacionamiento = ${estacionamiento}, vendedorId = ${vendedorId} WHERE id = ${id}; ";
-
-
-            // echo $query;
-            $resultado = mysqli_query($db, $query);
-
-            if($resultado){
-                //echo "Insertado Correctamente";
-
-                //Redireccionar al usuario
-                header("Location: /admin?resultado=2");
-            }
         }
 
 

@@ -43,9 +43,9 @@ class Propiedad{
         $this->vendedorId = $args['vendedorId'] ?? '1';
     }
 
-    public function guardar()
-    {
 
+    public function crear()
+    {
         //Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
         // debugear($atributos);
@@ -67,6 +67,42 @@ class Propiedad{
         $resultado = self::$db->query($query);
         
         return $resultado;
+    }
+
+    public function actualizar()
+    {
+        //Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+
+        //Este array va a ir al objeto en memoria y va a ir uniendo atributos con valores
+        $valores = [];
+
+        foreach ($atributos as $key => $value) {
+            $valores[] = "{$key}='{$value}'";
+        }
+
+        $query = "UPDATE propiedades SET ";
+        $query.=  join(', ', $valores);
+        $query.= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query.= " LIMIT 1 ";
+
+        $resultado = self::$db->query($query);
+
+        if($resultado){
+            //echo "Insertado Correctamente";
+            //Redireccionar al usuario
+            header("Location: /admin?resultado=2");
+        }
+        
+    }
+
+    public function guardar()
+    {
+        if (isset($this->id)) {//Si hay un ID presente, estamos actualizando....
+            $this->actualizar();
+        }else{ //Si no hay un ID, entonces, estamos creando un registro
+            $this->crear();
+        }
     }
 
     //Este metodo se encarga de iterar $columnasDB[], identifica y une los atributos de la BD
@@ -151,7 +187,7 @@ class Propiedad{
     public function setImagen($imagen)
     {
         //Elimina la imagen previa
-        if ($this->id) {
+        if (isset($this->id)) {
             //comprobar si existe el archivo(imagen)
             $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
 
