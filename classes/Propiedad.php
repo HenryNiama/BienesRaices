@@ -32,6 +32,44 @@ class Propiedad extends ActiveRecord{
         $this->creado = date('Y/m/d');
         $this->vendedorId = $args['vendedorId'] ?? '';
     }
+
+    public function validar()
+    {
+        if (!$this->titulo) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "Debes anadir un titulo.";
+        }
+
+        if (!$this->precio) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El precio es obligatorio.";
+        }
+
+        if (strlen($this->descripcion) < 50 || !$this->descripcion) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "La descripcion es obligatoria y debe tener al menos 50 caracteres.";
+        }
+
+        if (!$this->habitaciones) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El numero de habitaciones es obligatorio.";
+        }
+
+        if (!$this->wc) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El Número de baños es obligatorio.";
+        }
+
+        if (!$this->estacionamiento) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "El Número de lugares de estacionamiento es obligatorio.";
+        }
+
+        if (!$this->vendedorId) {//Si no hay titulo, es decir, esta vacio.
+            self::$errores[] = "Elige un vendedor.";
+        }
+
+        if (!$this->imagen) {
+            self::$errores[] = 'La Imagen de la Propiedad es Obligatoria';
+        }
+
+
+        return self::$errores;
+    }
 }
 
 ?>
