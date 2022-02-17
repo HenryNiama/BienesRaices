@@ -62,14 +62,9 @@
             //Ahora, guardamos la imagen en el servidor
             $image->save(CARPETA_IMAGENES . $nombreImagen);//Este metodo es de la libreria de Intervention Image
 
-            //Guarda en la base de datos
-            $resultado = $propiedad->crear();
+            //Crea en la base de datos
+            $propiedad->guardar();
 
-            //Mensaje de exito:
-            if($resultado){
-                //Redireccionar al usuario
-                header("Location: /admin?resultado=1");
-            }
         }
 
     }

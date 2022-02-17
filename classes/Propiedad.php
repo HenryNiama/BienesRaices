@@ -31,7 +31,7 @@ class Propiedad{
 
     public function __construct($args = [])
     {
-        $this->id = $args['id'] ?? '';
+        $this->id = $args['id'] ?? null;
         $this->titulo = $args['titulo'] ?? '';
         $this->precio = $args['precio'] ?? '';
         $this->imagen = $args['imagen'] ?? '';
@@ -48,11 +48,7 @@ class Propiedad{
     {
         //Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
-        // debugear($atributos);
 
-        // $string = implode(", ", array_keys($atributos));
-        // debugear($string);
-        // debugear(array_keys($atributos));
 
         //Insertar en la Base de Datos
         $query = "INSERT INTO propiedades ( " ;
@@ -60,13 +56,16 @@ class Propiedad{
         $query .=" ) VALUES (' ";
         $query .= implode("', '", array_values($atributos));
         $query .= " ')";
-        // debugear($query);
 
 
         //Como ya esta instanciada y conectada nuestra base de datos con el metodo estatico y $db, entonces:
         $resultado = self::$db->query($query);
         
-        return $resultado;
+        //Mensaje de exito:
+            if($resultado){
+                //Redireccionar al usuario
+                header("Location: /admin?resultado=1");
+            }
     }
 
     public function actualizar()
@@ -98,7 +97,7 @@ class Propiedad{
 
     public function guardar()
     {
-        if (isset($this->id)) {//Si hay un ID presente, estamos actualizando....
+        if (!is_null($this->id)) {//Si hay un ID presente, estamos actualizando....
             $this->actualizar();
         }else{ //Si no hay un ID, entonces, estamos creando un registro
             $this->crear();
@@ -205,7 +204,7 @@ class Propiedad{
     public function setImagen($imagen)
     {
         //Elimina la imagen previa
-        if (isset($this->id)) $this->borrarImagen();
+        if (!is_null($this->id)) $this->borrarImagen();
 
         //Asignar al atributo de imagen el nombre de la imagen
         if ($imagen) $this->imagen = $imagen;
