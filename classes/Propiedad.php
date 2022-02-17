@@ -105,6 +105,24 @@ class Propiedad{
         }
     }
 
+    //Eliminar 
+    public function eliminar()
+    {
+        // debugear('Eliminando...' . $this->id);
+        
+        //Eliminar la propiedad
+        $query = "DELETE FROM propiedades WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        // debugear($query);
+        $resultado = self::$db->query($query);
+
+        if ($resultado) {
+            $this->borrarImagen();
+            header('location: /admin?resultado=3');
+        }
+    }
+
+
+
     //Este metodo se encarga de iterar $columnasDB[], identifica y une los atributos de la BD
     public function iterarAtributos()
     {
@@ -187,17 +205,20 @@ class Propiedad{
     public function setImagen($imagen)
     {
         //Elimina la imagen previa
-        if (isset($this->id)) {
-            //comprobar si existe el archivo(imagen)
-            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-
-            if ($existeArchivo) unlink(CARPETA_IMAGENES . $this->imagen);                     
-        }
+        if (isset($this->id)) $this->borrarImagen();
 
         //Asignar al atributo de imagen el nombre de la imagen
-        if ($imagen) {
-            $this->imagen = $imagen;
-        }
+        if ($imagen) $this->imagen = $imagen;
+
+    }
+
+    //Eliminar archivo
+    public function borrarImagen()
+    {
+        //comprobar si existe el archivo(imagen)
+            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+
+            if ($existeArchivo) unlink(CARPETA_IMAGENES . $this->imagen);  
     }
 
 
@@ -269,6 +290,8 @@ class Propiedad{
             }
         }
     }
+
+
 
 }
 
