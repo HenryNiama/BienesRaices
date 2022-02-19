@@ -100,7 +100,7 @@ class ActiveRecord{
     {
         $atributos = [];
 
-        foreach (self::$columnasDB as $columna) {
+        foreach (static::$columnasDB as $columna) {
 
             if($columna === 'id') continue;
 
@@ -183,7 +183,7 @@ class ActiveRecord{
             $array = [];
             
             while($registro = $resultado->fetch_assoc()){
-                $array[] = self::crearObjeto($registro);//Se pasa el arreglo $registro
+                $array[] = static::crearObjeto($registro);//Se pasa el arreglo $registro
             }
 
             //Se obtiene un $array de $objeto(s)
