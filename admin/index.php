@@ -24,14 +24,26 @@ require '../includes/app.php';
     //*********************ELIMINAR UNA CELDA*********************************************** */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        debugear($_POST);
+        //debugear($_POST);
+
         $id = $_POST['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if ($id) {
-            $propiedad = Propiedad::find($id);
-            //debugear($propiedad);
-            $propiedad->eliminar();
+
+            $tipo = $_POST['tipo'];
+
+            if (validarTipoContenido($tipo)) {
+                //Compara lo q vamos a eliminar
+                if ($tipo === 'vendedor') {
+                    $vendedor = Vendedor::find($id);
+                    $vendedor->eliminar();
+                }else if($tipo === 'propiedad'){
+                    $propiedad = Propiedad::find($id);
+                    $propiedad->eliminar();
+                }
+            }
+
         }
     }
 
@@ -89,6 +101,7 @@ require '../includes/app.php';
 
                         <form action="" method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
+                            <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>  
 
@@ -122,6 +135,7 @@ require '../includes/app.php';
 
                         <form action="" method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $vendedor->id; ?>">
+                            <input type="hidden" name="tipo" value="vendedor">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>  
 
