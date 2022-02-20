@@ -77,6 +77,7 @@ require '../includes/app.php';
                 <p class="alerta exito">Anuncio Eliminado Correctamente.</p>
             <?php endif; ?>
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+        <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
 
         <h2>Propiedades</h2>
     
@@ -139,9 +140,11 @@ require '../includes/app.php';
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>  
 
-                        <a href="/admin/vendedores/actualizar.php?
-                            id=<?php echo $vendedor->id; ?>"
-                            class="boton-amarillo-block">Actualizar</a>
+                        <a href="/admin/vendedores/actualizar.php?id=<?php echo $vendedor->id; ?>"
+                           class="boton-amarillo-block">
+                           Actualizar
+                        </a>
+                        
                     </td>
                 </tr>
             <?php endforeach; ?>
