@@ -11,6 +11,19 @@
     $errores = Vendedor::getErrores();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //debugear($_POST); //Es un array con los valores
+
+        //Crear una nueva instancia
+        $vendedor = new Vendedor($_POST['vendedor']);
+        //debugear($vendedor); Ya es un objeto
+
+        //Validar que no halla campos vacios
+        $errores = $vendedor->validar();
+
+        //Si no hay errores
+        if (empty($errores)) {
+            $vendedor->guardar();
+        }
         
     }
 

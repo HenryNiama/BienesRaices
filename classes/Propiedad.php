@@ -67,7 +67,6 @@ class Propiedad extends ActiveRecord{
             self::$errores[] = 'La Imagen de la Propiedad es Obligatoria';
         }
 
-
         return self::$errores;
     }
 }
