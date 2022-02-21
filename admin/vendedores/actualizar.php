@@ -5,13 +5,34 @@
 
     estaAutenticado();
 
-    $vendedor = new Vendedor;
+    //Validar que se un ID valido
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
 
+    if (!$id) {
+        header('Location: /admin');
+    }
+
+    //Obtener el arreglo del vendedor
+    $vendedor = Vendedor::find($id);
+        // debugear($vendedor); //Trae todos los datos de la base de datos solo con el ID
+    
     //Arreglo con mensajes de errores
     $errores = Vendedor::getErrores();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
+        //Asignar los valores
+        $args = $_POST['vendedor'];
+
+        //Sincronizar el objeto en memoria con lo que el usuario escribio
+        $vendedor->sincronizar($args);
+
+        //validacion
+        $errores = $vendedor->validar();
+
+        if (empty($errores)) {
+            $vendedor->guardar();
+        }
     }
 
     incluirTemplate('header');
@@ -29,7 +50,7 @@
                 </div>
             <?php endforeach; ?>    
    
-        <form action="/admin/vendedores/actualizar.php" class="formulario" method="POST">
+        <form class="formulario" method="POST">
 
             <?php include '../../includes/templates/formulario_vendedores.php'; ?>
 
