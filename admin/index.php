@@ -4,6 +4,7 @@ require '../includes/app.php';
     
     estaAutenticado();
 
+    //Importar Clases:
     use App\Propiedad;
     use App\Vendedor;
 
@@ -11,21 +12,14 @@ require '../includes/app.php';
     $propiedades = Propiedad::all();
     $vendedores = Vendedor::all();
 
-    // debugear($vendedores);
+    //Muestra mensaje condicional
+    $resultado = $_GET['resultado'] ?? null;
 
 
-    //2) Escribir el Query
-    $query = "SELECT * FROM propiedades";
-    
-    //3) Consultar la base de datos
-    $resultadoConsulta = mysqli_query($db, $query);
 
-
-    //*********************ELIMINAR UNA CELDA*********************************************** */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        //debugear($_POST);
-
+        //Validar ID
         $id = $_POST['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -47,19 +41,6 @@ require '../includes/app.php';
         }
     }
 
-    //********************************************************************* */
-
-
-
-    // echo "<pre>";
-    // var_dump($_GET);
-    // echo "</pre>";
-    // exit;
-
-    //Muestra mensaje condicional
-    $resultado = $_GET['resultado'] ?? null;
-    
-    
 
     //Incluye un template
     incluirTemplate('header');
@@ -69,13 +50,13 @@ require '../includes/app.php';
     <main class="contenedor seccion">
 
         <h1>Administrador de Bienes Raices</h1>
-            <?php if (intval($resultado) === 1): ?>
-                <p class="alerta exito">Creado Correctamente.</p>          
-            <?php elseif(intval($resultado) === 2): ?>    
-                <p class="alerta exito">Actualizado Correctamente.</p>
-            <?php elseif(intval($resultado) === 3): ?>    
-                <p class="alerta exito">Eliminado Correctamente.</p>
-            <?php endif; ?>
+        
+        <?php
+            $mensaje = mostrarNotificacion(intval($resultado));
+            if($mensaje){ ?>
+                <p class="alerta exito"> <?php echo s($mensaje); ?> </p>
+            <?php } ?>
+
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
         <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
 
@@ -98,8 +79,8 @@ require '../includes/app.php';
                     <td><?php echo $propiedad->titulo; ?></td>
                     <td><img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
                     <td>$ <?php echo $propiedad->precio; ?></td>
-                    <td>
 
+                    <td>
                         <form action="" method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
                             <input type="hidden" name="tipo" value="propiedad">
@@ -108,8 +89,10 @@ require '../includes/app.php';
 
                         <a href="/admin/propiedades/actualizar.php?
                             id=<?php echo $propiedad->id; ?>"
-                            class="boton-amarillo-block">Actualizar</a>
+                            class="boton-amarillo-block">Actualizar
+                        </a>
                     </td>
+                    
                 </tr>
             <?php endforeach; ?>
             </tbody>            

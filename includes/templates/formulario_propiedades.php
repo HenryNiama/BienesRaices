@@ -18,8 +18,8 @@
                 <textarea name="propiedad[descripcion]" id="descripcion" cols="30" rows="10">
                     <?php echo s($propiedad->descripcion); ?>
                 </textarea>
+</fieldset>
 
-            </fieldset>
 
             <fieldset>
                 <legend>Informacion de la Propiedad</legend>
@@ -47,6 +47,4 @@
                         </option>
                     <?php } ?>    
                 </select>
-
-
             </fieldset>
