@@ -94,7 +94,6 @@ class ActiveRecord{
     }
 
 
-
     //Este metodo se encarga de iterar $columnasDB[], identifica y une los atributos de la BD
     public function iterarAtributos()
     {
@@ -231,6 +230,16 @@ class ActiveRecord{
                 $this->$key = $value;
             }
         }
+    }
+
+    //Obtiene determinado numero de registros
+    public static function get($cantidad)
+    {
+        $query = "SELECT * FROM ". static::$tabla . " LIMIT ". $cantidad;
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
     }
 
 }

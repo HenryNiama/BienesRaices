@@ -2,9 +2,16 @@
 
     use App\Propiedad;
 
-    $propiedades = Propiedad::all();
+    //debugear($_SERVER);
 
-    //debugear($propiedades);
+
+    //En caso, de que estemos en el archivo anuncios.php, o sea, en este.
+    if ($_SERVER['SCRIPT_NAME'] === '/anuncios.php') {//Mandamos a llamar todas las propiedades
+        $propiedades = Propiedad::all();
+    }else{//Si es que estamos en la pagina de inicio, o sea en el index. php
+        //Solo quiero que llame 3 propiedades.
+        $propiedades = Propiedad::get(3);
+    }
 ?>
 
 
