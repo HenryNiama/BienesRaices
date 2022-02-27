@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ce443869382f9c7f045772829424dbb74a2551dd',
+        'reference' => '88c6cbce971eb4ddbaec9529fed2186ff7f6a68f',
         'name' => 'henry/bienes-raices',
         'dev' => true,
     ),
@@ -25,7 +25,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ce443869382f9c7f045772829424dbb74a2551dd',
+            'reference' => '88c6cbce971eb4ddbaec9529fed2186ff7f6a68f',
             'dev_requirement' => false,
         ),
         'intervention/image' => array(
