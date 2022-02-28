@@ -44,7 +44,14 @@ class Router{
     //Muestra una vista
     public function render($view)
     {
+        //Iniciamos un almacenamiento en memoria
+        ob_start();
+        
         include __DIR__ . "/views/$view.php";
+
+        $contenido = ob_get_clean();//Lo limpiamos
+
+        include __DIR__  . "/views/layout.php";
     }
 
     
