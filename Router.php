@@ -1,5 +1,6 @@
 <?php
 
+//Este es el Modelo
 
 namespace MVC;
 
@@ -42,8 +43,15 @@ class Router{
 
 
     //Muestra una vista
-    public function render($view)
+    public function render($view, $datos = [])
     {
+
+        //El siguiente iterador, va a generar nombres de variables con el nombres de los keys
+        //del arreglo asociativo que existe en la funcion index en PropiedadController.
+        foreach ($datos as $key => $value) {
+            $$key = $value;
+        }
+
         //Iniciamos un almacenamiento en memoria
         ob_start();
         
