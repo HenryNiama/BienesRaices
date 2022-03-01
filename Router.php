@@ -1,6 +1,7 @@
 <?php
 
-//Este es el Modelo
+//Los Modelos vienes la carpeta de models, y parten desde el ActiveRecord
+//El Modelo interactua directamente con la Base de Datos.
 
 namespace MVC;
 
