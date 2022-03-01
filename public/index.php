@@ -14,7 +14,10 @@ use Controllers\PropiedadController;
     //Definimos las rutas:
     $router->get('/admin', [PropiedadController::class, 'index']);
     $router->get('/propiedades/crear', [PropiedadController::class, 'crear']);
+    $router->post('/propiedades/crear', [PropiedadController::class, 'crear']);
     $router->get('/propiedades/actualizar', [PropiedadController::class, 'actualizar']);
+    $router->post('/propiedades/actualizar', [PropiedadController::class, 'actualizar']);
+    $router->post('/propiedades/eliminar', [PropiedadController::class, 'eliminar']);
 
     $router->comprobarRutas();
 
