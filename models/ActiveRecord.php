@@ -40,7 +40,7 @@ class ActiveRecord{
         //Mensaje de exito:
             if($resultado){
                 //Redireccionar al usuario
-                header("Location: /admin?resultado=1");
+                header("Location: /public/admin?resultado=1");
             }
     }
 

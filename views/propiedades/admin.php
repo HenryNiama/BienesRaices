@@ -1,6 +1,3 @@
-<h1>Admin</h1>
-
-
 <main class="contenedor seccion">
 
         <h1>Administrador de Bienes Raices</h1>
@@ -19,7 +16,7 @@
         
         
         <a href="/public/propiedades/crear" class="boton boton-verde">Nueva Propiedad</a>
-        <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
+        <a href="/public/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
 
         <h2>Propiedades</h2>
     
