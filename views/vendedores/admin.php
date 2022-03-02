@@ -14,50 +14,51 @@
         ?> 
         
         
-
+        
         <a href="/public/propiedades/admin" class="boton boton-amarillo ">Propiedades</a>
         <a href="/public/vendedores/admin" class="boton boton-amarillo ">Vendedores</a>
 
-        <a href="/public/propiedades/crear" class="boton boton-verde" style="float: right;">Nueva Propiedad</a>
+        <a href="/public/vendedores/crear" class="boton boton-verde" style="float: right;">Nuevo Vendedor</a>
 
 
 
-        <h2>Propiedades</h2>
+    <h2>Vendedores</h2>
     
         <table class="propiedades">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Titulo</th>
-                    <th>Imagen</th>
-                    <th>Precio</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody> <!--4 Mostrar los Resultados-->
-            <?php foreach($propiedades as $propiedad): ?>
+            <?php foreach($vendedores as $vendedor): ?>
                 <tr>
-                    <td><?php echo $propiedad->id; ?></td>
-                    <td><?php echo $propiedad->titulo; ?></td>
-                    <td><img src="/public/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla" alt=""></td>
-                    <td>$ <?php echo $propiedad->precio; ?></td>
-
+                    <td><?php echo $vendedor->id; ?></td>
+                    <td><?php echo $vendedor->nombre . " " . $vendedor->apellido; ?></td>
+                    <td><?php echo $vendedor->telefono; ?></td>
                     <td>
-                        <form action="/public/propiedades/eliminar" method="POST" class="w-100">
-                            <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
-                            <input type="hidden" name="tipo" value="propiedad">
+
+                        <form action="" method="POST" class="w-100">
+                            <input type="hidden" name="id" value="<?php echo $vendedor->id; ?>">
+                            <input type="hidden" name="tipo" value="vendedor">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>  
 
-                        <a href="/public/propiedades/actualizar?id=<?php echo $propiedad->id; ?>"
-                            class="boton-amarillo-block">
-                            Actualizar
+                        <a href="/public/vendedores/actualizar.php?id=<?php echo $vendedor->id; ?>"
+                           class="boton-amarillo-block">
+                           Actualizar
                         </a>
+                        
                     </td>
-                    
                 </tr>
             <?php endforeach; ?>
             </tbody>            
         </table>
+
+        
+
 
 </main>

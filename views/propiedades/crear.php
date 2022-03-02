@@ -8,7 +8,7 @@
                 </div>
         <?php endforeach; ?>   
 
-        <a href="/public/admin" class="boton boton-verde">Volver</a>
+        <a href="/public/propiedades/admin" class="boton boton-verde">Volver</a>
         
         <!--Formulario: -->
         <form action="" class="formulario" method="POST" enctype="multipart/form-data">

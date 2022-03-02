@@ -24,7 +24,7 @@ class PropiedadController{
 
         $router->render('propiedades/admin', [
             'propiedades' => $propiedades,
-            'resultado' => $resultado
+            'resultado' => $resultado,
         ]);
     }
 
