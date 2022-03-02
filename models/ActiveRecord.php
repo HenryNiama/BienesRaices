@@ -66,7 +66,7 @@ class ActiveRecord{
         if($resultado){
             //echo "Insertado Correctamente";
             //Redireccionar al usuario
-            header("Location: /admin?resultado=2");
+            header("Location: /public/admin?resultado=2");
         }
         
     }
@@ -89,7 +89,7 @@ class ActiveRecord{
 
         if ($resultado) {
             $this->borrarImagen();
-            header('location: /admin?resultado=3');
+            header('location: /public/admin?resultado=3');
         }
     }
 
