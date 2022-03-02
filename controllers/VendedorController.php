@@ -3,8 +3,7 @@
 namespace Controllers;
 
 use MVC\Router;
-use Model\Propiedad; //Importamos nuestro Modelo
-use Model\Vendedor;
+use Model\Vendedor;  //Importamos nuestro Modelo
 
 class VendedorController{
 
@@ -18,6 +17,18 @@ class VendedorController{
         $router->render('vendedores/admin', [
             'vendedores' => $vendedores,
             'resultado' => $resultado
+        ]);
+    }
+
+    public static function crear(Router $router)
+    {
+        $vendedor = new Vendedor();
+        $errores = Vendedor::getErrores();
+
+
+        $router->render('vendedores/crear', [
+            'vendedor' => $vendedor,
+            'errores' => $errores
         ]);
     }
 
