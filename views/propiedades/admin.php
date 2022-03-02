@@ -39,7 +39,7 @@
                     <td>$ <?php echo $propiedad->precio; ?></td>
 
                     <td>
-                        <form action="" method="POST" class="w-100">
+                        <form action="/public/propiedades/eliminar" method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
                             <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
