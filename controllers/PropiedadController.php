@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+
 use MVC\Router;
 use Model\Propiedad; //Importamos nuestro Modelo
 use Model\Vendedor;
@@ -13,9 +14,9 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class PropiedadController{
 
+
     public static function index(Router $router)
     {
-
         $propiedades = Propiedad::all();
 
         //Muestra mensaje condicional
@@ -26,6 +27,7 @@ class PropiedadController{
             'resultado' => $resultado
         ]);
     }
+
 
     public static function crear(Router $router)
     {
@@ -85,10 +87,25 @@ class PropiedadController{
         ]);
     }
 
-    public static function actualizar()
+
+
+    public static function actualizar(Router $router)
     {
-        echo "Actualizar propiedad:";
+        $id = validarORedireccionar('/public/admin');
+
+        $propiedad = Propiedad::find($id);
+        $vendedores = Vendedor::all();
+        $errores = Propiedad::getErrores();
+
+        $router->render('propiedades/actualizar', [
+            'propiedad' => $propiedad,
+            'errores' => $errores,
+            'vendedores' => $vendedores
+        ]);
     }
+
+
+
 }
 
 ?>
