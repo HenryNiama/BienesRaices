@@ -7,6 +7,7 @@ use Model\Vendedor;  //Importamos nuestro Modelo
 
 class VendedorController{
 
+
     public static function index(Router $router)
     {
         $vendedores = Vendedor::all();
@@ -19,6 +20,7 @@ class VendedorController{
             'resultado' => $resultado
         ]);
     }
+
 
     public static function crear(Router $router)
     {
@@ -51,7 +53,16 @@ class VendedorController{
 
     public static function actualizar(Router $router)
     {
-        echo "Actualizando vendedores";
+        $id = validarORedireccionar('/public/vendedores/admin');       
+        $errores = Vendedor::getErrores();
+
+        //Obtener datos del vendedor a Actualizar
+        $vendedor = Vendedor::find($id);
+
+        $router->render('vendedores/actualizar', [
+            'vendedor' => $vendedor,
+            'errores' => $errores
+        ]);
     }
 
     public static function eliminar(Router $router)
