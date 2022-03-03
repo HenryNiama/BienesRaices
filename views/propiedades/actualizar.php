@@ -10,7 +10,7 @@
 
         <a href="/public/admin" class="boton boton-verde">Volver</a>
 
-        <!--Formulario: -->
+        <!--Aqui en actualizar Propiedad, se elimina el action del formulario para que lo mande a la misma url. -->
         <form action="" class="formulario" method="POST" enctype="multipart/form-data">
             <?php include __DIR__ . '/formulario.php'; ?>
 

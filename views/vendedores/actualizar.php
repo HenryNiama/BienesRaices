@@ -9,7 +9,7 @@
                 </div>
             <?php endforeach; ?>    
    
-        <form action="/public/vendedores/actualizar" class="formulario" method="POST">
+        <form action="" class="formulario" method="POST">
 
             <?php include __DIR__ . '/formulario.php'; ?>
 
