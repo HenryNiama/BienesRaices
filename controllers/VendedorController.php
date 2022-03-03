@@ -25,6 +25,23 @@ class VendedorController{
         $vendedor = new Vendedor();
         $errores = Vendedor::getErrores();
 
+        //Cuando haya un request method en POST, entonces:
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            //Creamos una nueva instancia de Vendedor
+            $vendedor = new Vendedor($_POST['vendedor']);
+            //debugear($vendedor); Ya es un objeto
+    
+            //Validar que no halla campos vacios
+            $errores = $vendedor->validar();
+    
+            //Si no hay errores
+            if (empty($errores)) {
+                $vendedor->guardar();
+            }
+            
+        }
+
 
         $router->render('vendedores/crear', [
             'vendedor' => $vendedor,

@@ -9,7 +9,7 @@
                 </div>
             <?php endforeach; ?>    
    
-        <form action="/admin/vendedores/crear.php" class="formulario" method="POST">
+        <form action="/public/vendedores/crear" class="formulario" method="POST">
             <?php include __DIR__ . '/formulario.php'; ?>
 
             <input type="submit" value="Registrar Vendedor" class="boton boton-verde">
