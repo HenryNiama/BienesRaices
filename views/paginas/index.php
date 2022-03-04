@@ -23,7 +23,7 @@
         <p>
             Llena el formulario de contacto y un asesor se pondra en contacto contigo a la brevedad.
         </p>
-        <a href="contacto.php" class="boton-amarillo">Contactanos</a>
+        <a href="/public/contacto" class="boton-amarillo">Contactanos</a>
     </section>
 
 
