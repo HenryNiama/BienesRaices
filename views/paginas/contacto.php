@@ -32,7 +32,7 @@
                 <legend>Informacion de la propiedada</legend>
 
                 <label for="opciones">Vende o compra: </label>
-                <select name="opciones" id="opciones" name="contacto[tipo]" required>
+                <select id="opciones" name="contacto[tipo]" required>
                     <option value="" disabled selected>-- Seleccione --</option>
                     <option value="Compra">Compra</option>
                     <option value="Vende">Vende</option>
@@ -52,10 +52,10 @@
 
                 <div class="forma-contacto">
                     <label for="contactar-telefono">Telefono</label>
-                    <input name="contacto" type="radio" value="telefono" id="contactar-telefono" name="contacto[contacto]" required>
+                    <input type="radio" value="telefono" id="contactar-telefono" name="contacto[contacto]" required>
 
                     <label for="contactar-email">E-mail</label>
-                    <input name="contacto" type="radio" value="email" id="contactar-email" name="contacto[contacto]" required>
+                    <input type="radio" value="email" id="contactar-email" name="contacto[contacto]" required>
                 </div>
 
                 <p>Si eligio telefono, elija la fecha y la hora</p>
