@@ -4,7 +4,7 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Propiedad;
-
+use PHPMailer\PHPMailer\PHPMailer;
 
 class PaginasController{
 
@@ -60,7 +60,44 @@ class PaginasController{
     public static function contacto(Router $router)
     {
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            debugear($_POST);
+
+            //Crear una instancia de PHPMailer
+            $mail = new PHPMailer();
+
+            //Configurar SMTP
+            $mail->isSMTP();//Le decimos que use este protocolo para el envio de mails.
+            $mail->Host = 'smtp.mailtrap.io';//Este le copiamos de la pagina de mailtrap, en el codigo de Laravel en HOST
+            $mail->SMTPAuth = true;//Le decimos que nos queremos autenticar.
+
+            //Estas credenciales las copiamos de la pagina de Mailtrap
+            $mail->Username = '3da1bb271badcb';
+            $mail->Password = '837263d6fc53b0';
+
+            $mail->SMTPSecure = 'tls';//Transport Layer Secure
+            $mail->Port = 2525;//Le indicamos por el puerto que se va a comunicar
+
+
+            //Configurar el Contenido del Email
+            $mail->setFrom('admin@bienesraices.com');//Este es quien envia el emal.
+            $mail->addAddress('admin@bienesraices.com', 'BienesRaices.com');//Este es a quien le llega el email. Es donde se recibe
+            $mail->Subject = 'Tienes un nuevo mensaje'; //Esto es lo que el usuario va a leer.
+
+            //Habilitar HTML
+            $mail->isHTML(true);
+            $mail->CharSet = 'UTF-8';//Muestra los acentos correctamente.
+            
+            //Definir el contenido
+            $contenido = '<html> <p>Tienes un nuevo mensaje</p> </html>';
+            $mail->Body = $contenido;
+            $mail->AltBody = 'Esto es texto alternativo sin HTML';
+
+            //Enviar el Email      
+            if ($mail->send()) {//Retornar true or false
+                echo "Mensaje enviado Correctamente";
+            }else{
+                echo "El mensaje no se pudo enviar...";
+            }
+
         }
 
         $router->render('paginas/contacto', [
