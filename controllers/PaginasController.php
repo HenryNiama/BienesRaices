@@ -25,9 +25,13 @@ class PaginasController{
         $router->render('paginas/nosotros');
     }
 
-    public static function propiedades()
+    public static function propiedades(Router $router)
     {
-        echo "Desde Propiedades";
+        $propiedades = Propiedad::all();
+
+        $router->render('paginas/propiedades', [
+            'propiedades' => $propiedades
+        ]);
     }
 
     public static function propiedad()

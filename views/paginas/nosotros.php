@@ -31,6 +31,6 @@
     <section class="contenedor seccion">
         <h1>Mas sobre nosotros</h1>
 
-        <?php include __DIR__ . '/iconos.php'; ?>
+        <?php include 'iconos.php'; ?>
 
     </section>

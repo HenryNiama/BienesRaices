@@ -1,22 +1,18 @@
 <main class="contenedor seccion">
         <h1>Mas sobre nosotros</h1>
 
-        <?php include __DIR__ . '/iconos.php'; ?>
+        <?php include 'iconos.php'; ?>
 </main>
 
     <section class="seccion contenedor">
         <h2>Casas y Depas en Venta</h2>
 
 
-        <?php
-            $limite = 3; 
-            include __DIR__ . "/listado.php";
-            
-        ?>
+        <?php include "listado.php"; ?>
         
 
         <div class="alinear-derecha">
-            <a href="anuncios.php" class="boton-verde">Ver Todas</a>
+            <a href="/public/propiedades" class="boton-verde">Ver Todas</a>
         </div>
 
     </section>
