@@ -20,9 +20,9 @@ class PaginasController{
         ]);
     }
 
-    public static function nosotros()
+    public static function nosotros(Router $router)
     {
-        echo "Desde Nosotros";
+        $router->render('paginas/nosotros');
     }
 
     public static function propiedades()
