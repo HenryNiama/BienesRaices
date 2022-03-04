@@ -29,7 +29,7 @@
         <div class="contenedor contenido-header">
 
             <div class="barra">
-                <a href="/">
+                <a href="/public">
                     <img src="/public/build/img/logo.svg" alt="Logotipo de Bienes Raices">
                 </a>
                 <div class="mobile-menu">

@@ -46,14 +46,15 @@ class PaginasController{
         ]);
     }
 
-    public static function blog()
+    public static function blog(Router $router)
     {
-        echo "Desde blog";
+        //Si quisiera hacer este blog importante, deberia agregar un nuevo modelo llamado Blog
+        $router->render('paginas/blog');
     }
 
-    public static function entrada()
-    {
-        echo "Desde Entrada";
+    public static function entrada(Router $router)
+    {//Si quisiera hacer el blog dinamico, esta entrada debe usar active record, y usar el metodo de find, aqui.
+        $router->render('paginas/entrada');
     }
 
     public static function contacto()
