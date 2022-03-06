@@ -18,11 +18,19 @@ class LoginController{
 
             if (empty($errores)) {
                 //Verificar si el usuario existe
+                $resultado = $auth->existeUsuario();
 
-                //Verificar el password
+                //Si no hay resultado, o sea, es null.
+                if (!$resultado) {
+                    $errores = Admin::getErrores();
+                }else{
+                    //Verificar el password
 
-                //Autenticar al usuario
+                    //Autenticar al usuario
+                }
+
             }
+
         }
 
         $router->render('auth/login', [

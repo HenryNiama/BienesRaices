@@ -34,5 +34,22 @@ class Admin extends ActiveRecord{
 
         return self::$errores;
     }
+
+    public function existeUsuario()
+    {
+        //Revisar si un usuario existe  o no
+        $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
+
+        $resultado = self::$db->query($query);
+
+        // debugear($resultado); Revisamos los resultados que arroja
+        if (!$resultado->num_rows) {//Si no hay ningun num_rows, es decir es 0, entonces:
+            self::$errores[] = 'El Usuario No existe';
+            return; //Este return; hace que el codigo deje de ejecutarse
+        }
+
+        //En caso contrario, de que si exista el resultado, entonces:
+        return $resultado;
+    }
 }
 ?>
