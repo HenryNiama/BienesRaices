@@ -22,5 +22,17 @@ class Admin extends ActiveRecord{
         $this->password = $args['password'] ?? ''; 
     }
 
+    //El metodo validar, es propio de cada modelo, es decir, hay un validar() para cada modelo.
+    public function validar()
+    {
+        if (!$this->email) {
+            self::$errores[] = 'El Email es Obligatorio';
+        }
+        if (!$this->password) {
+            self::$errores[] = 'El Password es Obligatorio'; 
+        }
+
+        return self::$errores;
+    }
 }
 ?>
