@@ -51,7 +51,13 @@ class LoginController{
     }
 
     public static function logout(){
-        echo "Desde Logout";
+        session_start();
+
+        $_SESSION = [];
+
+        //Una ves limpiada o cerrada lasession,
+        //Nos redirigimos a la pagina principal
+        header('Location: /public');
     }
 }
 ?>
