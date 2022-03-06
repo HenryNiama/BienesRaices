@@ -22,11 +22,23 @@ class LoginController{
 
                 //Si no hay resultado, o sea, es null.
                 if (!$resultado) {
+                    //Verificamos si el usuario existe o no: (mensaje de error)
                     $errores = Admin::getErrores();
-                }else{
-                    //Verificar el password
 
-                    //Autenticar al usuario
+                }else{//Si el usuario SI existe. entonces:
+
+                    //Verificar el password
+                    $autenticado = $auth->comprobarPassword($resultado);
+
+                    
+                    if ($autenticado) {
+                        //Autenticar al usuario
+                        
+                    }else{
+                        //Password Incorrecto (mensaje de error)
+                        $errores = Admin::getErrores();
+                    }
+
                 }
 
             }

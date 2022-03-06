@@ -51,5 +51,22 @@ class Admin extends ActiveRecord{
         //En caso contrario, de que si exista el resultado, entonces:
         return $resultado;
     }
+
+    public function comprobarPassword($resultado)
+    {
+        //Traemos el resultado, de lo que haya encontrado en la Base de Datos.
+        $usuario = $resultado->fetch_object();
+
+        // debugear($usuario);
+
+        //Usamos la funcion de PHP para comparar las Passqord
+        $autenticado = password_verify($this->password, $usuario->password);//Retorna true or false.
+
+        if (!$autenticado) {
+            self::$errores[] = 'El Password es Incorrecto';
+        }
+
+        return $autenticado;//Retorna True or False
+    }
 }
 ?>
