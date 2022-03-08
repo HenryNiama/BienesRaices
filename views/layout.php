@@ -45,7 +45,9 @@
                         <a href="/public/contacto">Contacto</a>
                         <?php if($auth): ?>
                             <a href="/public/logout">Sign Out</a>
-                        <?php endif; ?>
+                        <?php else: ?>
+                            <a href="/public/login">Sign In</a>
+                        <?php endif; ?>                         
                     </nav>
                 </div>
             </div><!--Barra-->
