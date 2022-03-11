@@ -6,7 +6,10 @@ describe('Carga la pagina Principal', () => {
         cy.visit('/');
 
         //Estoy seleccionando el h1, de mi layout en el heading.
-        cy.get('[data-cy="heading-sitio"]');//Tuve q agregar un nuevo atributo a h1.
+       //Tuve q agregar un nuevo atributo a h1.
+        cy.get('[data-cy="heading-sitio"]').should('exist');
+
+        cy.get('[data-cy="heading-sitio"]').invoke('text').should('equal', 'Venta de casas y departamentos Exclusivos de Lujo');
 
 
     }); 
