@@ -4,7 +4,7 @@
 
 <?php foreach($propiedades as $propiedad ) { ?>
 
-        <div class="anuncio">
+        <div class="anuncio" data-cy="anuncio">
                 <img loading="lazy" src="/public/imagenes/<?php echo $propiedad->imagen; ?>" alt="anuncio">
 
             <div class="contenido-anuncio">
@@ -27,7 +27,7 @@
                     </li>
                 </ul>
 
-                <a href="/public/propiedad?id=<?php echo $propiedad->id; ?>" class="boton-amarillo-block">
+                <a data-cy="enlace-propiedad" href="/public/propiedad?id=<?php echo $propiedad->id; ?>" class="boton-amarillo-block">
                     Ver Propiedad
                 </a>
 
