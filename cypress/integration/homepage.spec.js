@@ -73,7 +73,19 @@ describe('Carga la pagina Principal', () => {
 
         cy.get('[data-cy="heading-contacto"]').should('exist');
         cy.wait(2500);
-        cy.visit('/');//Aqui va visit, y no go, por que arriba usamos el .then que es para visitar.
+        cy.visit('/');//Aqui va visit, y no go, por que arriba usamos el .then que es para visitar. 
+    });
+
+    it('Probando Blog y los Testimoniales', ()=>{
+        cy.get('[data-cy="blog"]').should('exist');
+        cy.get('[data-cy="blog"]').find('h3').invoke('text').should('equal', 'Nuestro Blog');
+        cy.get('[data-cy="blog"]').find('img').should('have.length', 2);
+        
+
+        cy.get('[data-cy="testimoniales"]').should('exist');
+        cy.get('[data-cy="testimoniales"]').find('h3').invoke('text').should('equal', 'Testimoniales');
+
+
     });
 
 });
