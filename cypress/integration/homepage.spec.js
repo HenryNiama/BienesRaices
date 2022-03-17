@@ -1,4 +1,4 @@
-/// <references types="cypress" />
+/// <reference types="cypress" />
 
 
 describe('Carga la pagina Principal', () => {
@@ -59,6 +59,21 @@ describe('Carga la pagina Principal', () => {
 
         cy.wait(1000);//En milisegundos
         cy.go('back');
+    });
+
+    //Probando el bloque de contacto:
+    it('Prueba el Bloque de Contacto', ()=>{
+        cy.get('[data-cy="imagen-contacto"]').should('exist');
+        cy.get('[data-cy="imagen-contacto"]').find('h2').invoke('text').should('equal', 'Encuentra la casa de tus sueños');
+        //La siguiente sirve para verificar que las URLs esten funcionando y me refirijan a esa pagina
+        cy.get('[data-cy="imagen-contacto"]').find('a').invoke('attr', 'href')
+        .then( href => {
+            cy.visit(href)
+        })
+
+        cy.get('[data-cy="heading-contacto"]').should('exist');
+        cy.wait(2500);
+        cy.visit('/');//Aqui va visit, y no go, por que arriba usamos el .then que es para visitar.
     });
 
 });
