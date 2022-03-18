@@ -12,6 +12,9 @@ describe('Prueba el Formulario de Contacto', ()=>{
         cy.get('[data-cy="heading-formulario"]').should('exist');
         cy.get('[data-cy="heading-formulario"]').invoke('text').should('equal', 'Llene el Formulario de Contacto');
 
+
+        //---------------------------------------------------------------
+        cy.get('[data-cy="formulario-contacto"]').should('exist');
     });
 
 
@@ -31,6 +34,17 @@ describe('Prueba el Formulario de Contacto', ()=>{
         cy.get('[data-cy="input-fecha"]').type('2022-03-30');
 
         cy.get('[data-cy="input-hora"]').type('12:30');
+
+
+        //Enviar formulario una ves esta lleno.
+        cy.get('[data-cy="formulario-contacto"]').submit();
+
+        cy.get('[data-cy="alerta-envio-formulario"]').should('exist');
+        cy.get('[data-cy="alerta-envio-formulario"]').invoke('text').should('equal', 'Mensaje Enviado Correctamente');
+        //Para probar si existen varias clases:
+        cy.get('[data-cy="alerta-envio-formulario"]').should('have.class', 'alerta').and('have.class', 'exito').and(
+            'not.have.class', 'error'
+        );
 
     });
 
