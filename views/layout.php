@@ -38,9 +38,9 @@
 
                 <div class="derecha">
                     <img class="dark-mode-boton" src="/public/build/img/dark-mode.svg" alt="">
-                    <nav class="navegacion">
+                    <nav data-cy="navegacion-header" class="navegacion">
                         <a href="/public/nosotros">Nosotros</a>
-                        <a href="/public/propiedades">Anuncios</a>
+                        <a href="/public/propiedades">Propiedades</a>
                         <a href="/public/blog">Blog</a>
                         <a href="/public/contacto">Contacto</a>
                         <?php if($auth): ?>
@@ -67,11 +67,11 @@
 
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
-            <nav class="navegacion">
-                <a href="nosotros.php">Nosotros</a>
-                <a href="anuncios.php">Anuncios</a>
-                <a href="blog.php">Blog</a>
-                <a href="contacto.php">Contacto</a>
+            <nav data-cy="navegacion-footer" class="navegacion">
+                <a href="/public/nosotros">Nosotros</a>
+                <a href="/public/propiedades">Propiedades</a>
+                <a href="/public/blog">Blog</a>
+                <a href="/public/contacto">Contacto</a>
             </nav>
         </div>
 
